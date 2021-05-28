@@ -90,7 +90,7 @@ dataset = os.listdir(trainB)
 train, test = train_test_split(dataset, test_size=0.2)
        
 for filename in test:
-    shutil.move(os.path.join(root,filename), testB)
+    shutil.move(os.path.join(trainB,filename), testB)
        
 train = os.listdir(trainB)
 test = os.listdir(testB)
