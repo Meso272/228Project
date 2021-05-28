@@ -51,7 +51,7 @@ if not os.path.exists(testB):
     os.makedirs(testB)
 
 
-tempA_images=os.path.join(tempA,image)
+tempA_images=os.path.join(tempA,"image")
 _, _, dataset = next(walk(tempA_images))
 for image in dataset:
     im = Image.open(os.path.join(tempA_images,image))
