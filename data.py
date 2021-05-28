@@ -60,10 +60,15 @@ dataset = os.listdir(tempA_images)
 train, test = train_test_split(dataset, test_size=0.2)
      
 for filename in train:
-    shutil.move(os.path.join(tempA_images,filename), trainA)
+    try: 
+        shutil.move(os.path.join(tempA_images,filename), trainA)
+    except:
+        pass
 for filename in test:
-    shutil.move(os.path.join(tempA_images,filename), testA)
-     
+    try: 
+        shutil.move(os.path.join(tempA_images,filename), testA)
+    except:
+        pass
        
 train = os.listdir(trainA)
 test = os.listdir(testA)
@@ -90,7 +95,10 @@ dataset = os.listdir(trainB)
 train, test = train_test_split(dataset, test_size=0.2)
        
 for filename in test:
-    shutil.move(os.path.join(trainB,filename), testB)
+    try: 
+        shutil.move(os.path.join(trainB,filename), testB)
+    except:
+        pass
        
 train = os.listdir(trainB)
 test = os.listdir(testB)
