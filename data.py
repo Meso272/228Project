@@ -52,11 +52,11 @@ if not os.path.exists(testB):
 
 
 tempA_images=os.path.join(tempA,"image")
-_, _, dataset = next(walk(tempA_images))
+dataset = os.listdir(tempA_images)
 for image in dataset:
     im = Image.open(os.path.join(tempA_images,image))
     im.resize((320,256)).save(os.path.join(tempA_images,image))
-_, _, dataset = next(walk(tempA_images))
+dataset = os.listdir(tempA_images)
 train, test = train_test_split(dataset, test_size=0.2)
      
 for filename in train:
@@ -65,14 +65,14 @@ for filename in test:
     shutil.move(os.path.join(tempA_images,filename), testA)
      
        
-_, _, train = next(walk(trainA))
-_, _, test = next(walk(testA))
+train = os.listdir(trainA)
+test = os.listdir(testA)
 print(len(train), len(test))
 
 
 
 
-_, _, images = next(walk(tempB))
+images =os.listdir(tempB)
      
 for image in images:
       
@@ -86,14 +86,14 @@ for image in images:
 
 
 
-_, _, dataset = next(walk(trainB))
+dataset = os.listdir(trainB)
 train, test = train_test_split(dataset, test_size=0.2)
        
 for filename in test:
     shutil.move(os.path.join(root,filename), testB)
        
-_, _, train = next(walk(trainB))
-_, _, test = next(walk(testB))
+train = os.listdir(trainB)
+test = os.listdir(testB)
 print(len(train), len(test))
 
 os.system("rm -rf %s" %tempA)
