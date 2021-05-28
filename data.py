@@ -11,7 +11,7 @@ if len(sys.argv)>=3:
 else:
     mode="UGATIT"
 if not os.path.exists(datafolder):
-    os.mkdirs(datafolder)
+    os.makedirs(datafolder)
 if not os.path.exists("part1.zip"):
     os.system("wget -P . http://www.cs.ucf.edu/~aroshan/index_files/Dataset_PitOrlManh/zipped\%20images/part1.zip --no-check-certificate")
 if not os.path.exists("01_images.zip"):
@@ -20,11 +20,11 @@ if not os.path.exists("01_images.zip"):
 
 tempA=os.path.join(datafolder,"tempA")
 if not os.path.exists(tempA):
-    os.mkdirs(tempA)
+    os.makedirs(tempA)
 os.system("unzip 01_images.zip -d %s" % tempA)
 tempB=os.path.join(datafolder,"tempB")
 if not os.path.exists(tempB):
-    os.mkdirs(tempB)
+    os.makedirs(tempB)
 os.system("unzip part1.zip -d %s" % tempB)
 if mode=="UGATIT":
     trainA=os.path.join(datafolder,"trainA")
@@ -37,13 +37,13 @@ else:
     testA=os.path.join(datafolder,"test/A")
     testB=os.path.join(datafolder,"test/B")
 if not os.path.exists(trainA):
-    os.mkdirs(trainA)
+    os.makedirs(trainA)
 if not os.path.exists(trainB):
-    os.mkdirs(trainB)
+    os.makedirs(trainB)
 if not os.path.exists(testA):
-    os.mkdirs(testA)
+    os.makedirs(testA)
 if not os.path.exists(testB):
-    os.mkdirs(testB)
+    os.makedirs(testB)
 
 
 
