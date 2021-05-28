@@ -51,18 +51,18 @@ if not os.path.exists(testB):
     os.makedirs(testB)
 
 
-
-_, _, dataset = next(walk(tempA))
+tempA_images=os.path.join(tempA,image)
+_, _, dataset = next(walk(tempA_images))
 for image in dataset:
-    im = Image.open(os.path.join(tempA,image))
-    im.resize((320,256)).save(os.path.join(tempA,image))
-
+    im = Image.open(os.path.join(tempA_images,image))
+    im.resize((320,256)).save(os.path.join(tempA_images,image))
+_, _, dataset = next(walk(tempA_images))
 train, test = train_test_split(dataset, test_size=0.2)
      
 for filename in train:
-    shutil.move(os.path.join(tempA,filename), trainA)
+    shutil.move(os.path.join(tempA_images,filename), trainA)
 for filename in test:
-    shutil.move(os.path.join(tempA,filename), testA)
+    shutil.move(os.path.join(tempA_images,filename), testA)
      
        
 _, _, train = next(walk(trainA))
