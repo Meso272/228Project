@@ -10,6 +10,10 @@ if len(sys.argv)>=3:
     mode=sys.argv[2]
 else:
     mode="UGATIT"
+if len(sys.argv)>=4:
+    skipunzip=int(sys.argv[3])
+else:
+    skipunzip=False
 if not os.path.exists(datafolder):
     os.makedirs(datafolder)
 if not os.path.exists("part1.zip"):
@@ -21,11 +25,12 @@ if not os.path.exists("01_images.zip"):
 tempA=os.path.join(datafolder,"tempA")
 if not os.path.exists(tempA):
     os.makedirs(tempA)
-os.system("unzip 01_images.zip -d %s" % tempA)
 tempB=os.path.join(datafolder,"tempB")
 if not os.path.exists(tempB):
     os.makedirs(tempB)
-os.system("unzip part1.zip -d %s" % tempB)
+if not skipunzip:
+    os.system("unzip 01_images.zip -d %s" % tempA)
+    os.system("unzip part1.zip -d %s" % tempB)
 if mode=="UGATIT":
     trainA=os.path.join(datafolder,"trainA")
     trainB=os.path.join(datafolder,"trainB")
@@ -48,6 +53,10 @@ if not os.path.exists(testB):
 
 
 _, _, dataset = next(walk(tempA))
+for image in dataset:
+    im = Image.open(os.path.join(tempA,image))
+    im.resize((320,256)).save(os.path.join(tempA,image))
+
 train, test = train_test_split(dataset, test_size=0.2)
      
 for filename in train:
@@ -72,6 +81,7 @@ for image in images:
         width, height = im.size
         
         im_crop = im.crop((5,150,width-5,height-20))
+        im_crop=im_crop.resize((320,256))
         im_crop.save(os.path.join(trainB,image))
 
 
@@ -85,6 +95,9 @@ for filename in test:
 _, _, train = next(walk(trainB))
 _, _, test = next(walk(testB))
 print(len(train), len(test))
+
+os.system("rm -rf %s" %tempA)
+os.system("rm -rf %s" %tempB)
 
 
 
