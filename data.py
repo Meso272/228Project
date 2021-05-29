@@ -87,16 +87,20 @@ for image in images:
         
         im_crop = im.crop((5,150,width-5,height-20))
         im_crop=im_crop.resize((320,256))
-        im_crop.save(os.path.join(trainB,image))
+        im_crop.save(os.path.join(tempB,image))
 
 
 
-dataset = os.listdir(trainB)
+dataset = os.listdir(tempB)
 train, test = train_test_split(dataset, test_size=0.2)
-       
+for filename in train:
+    try: 
+        shutil.move(os.path.join(tempB,filename), trainB)
+    except:
+        pass 
 for filename in test:
     try: 
-        shutil.move(os.path.join(trainB,filename), testB)
+        shutil.move(os.path.join(tempB,filename), testB)
     except:
         pass
        
