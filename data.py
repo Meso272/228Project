@@ -6,20 +6,22 @@ from sklearn.model_selection import train_test_split
 import shutil
 import sys
 datafolder=sys.argv[1]
-if len(sys.argv)>=3:
-    mode=sys.argv[2]
+A_zip=sys.argv[2]
+B_zip=sys.argv[3]
+if len(sys.argv)>=5:
+    mode=sys.argv[4]
 else:
     mode="UGATIT"
-if len(sys.argv)>=4:
-    skipunzip=int(sys.argv[3])
+if len(sys.argv)>=6:
+    skipunzip=int(sys.argv[5])
 else:
     skipunzip=False
 if not os.path.exists(datafolder):
     os.makedirs(datafolder)
-if not os.path.exists("part1.zip"):
-    os.system("wget -P . http://www.cs.ucf.edu/~aroshan/index_files/Dataset_PitOrlManh/zipped\%20images/part1.zip --no-check-certificate")
-if not os.path.exists("01_images.zip"):
-    os.system("wget -P . https://download.visinf.tu-darmstadt.de/data/from_games/data/01_images.zip --no-check-certificate")
+if not os.path.exists(A_zip):
+    os.system("wget -P . http://www.cs.ucf.edu/~aroshan/index_files/Dataset_PitOrlManh/zipped\%20images/%s --no-check-certificate" % A_zip)
+if not os.path.exists(B_zip):
+    os.system("wget -P . https://download.visinf.tu-darmstadt.de/data/from_games/data/%s --no-check-certificate" % B_zip)
 
 
 tempA=os.path.join(datafolder,"tempA")
