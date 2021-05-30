@@ -6,8 +6,8 @@ from sklearn.model_selection import train_test_split
 import shutil
 import sys
 datafolder=sys.argv[1]
-A_zip=sys.argv[2]
-B_zip=sys.argv[3]
+A_zip=sys.argv[2]#01_images.zip
+B_zip=sys.argv[3]#part1.zip
 if len(sys.argv)>=5:
     mode=sys.argv[4]
 else:
@@ -18,11 +18,11 @@ else:
     skipunzip=False
 if not os.path.exists(datafolder):
     os.makedirs(datafolder)
-if not os.path.exists(A_zip):
-    os.system("wget -P . http://www.cs.ucf.edu/~aroshan/index_files/Dataset_PitOrlManh/zipped\%20images/%s --no-check-certificate" % A_zip)
-if not os.path.exists(B_zip):
-    os.system("wget -P . https://download.visinf.tu-darmstadt.de/data/from_games/data/%s --no-check-certificate" % B_zip)
 
+if not os.path.exists(A_zip):
+    os.system("wget -P . https://download.visinf.tu-darmstadt.de/data/from_games/data/%s --no-check-certificate" % A_zip)
+if not os.path.exists(B_zip):
+    os.system("wget -P . http://www.cs.ucf.edu/~aroshan/index_files/Dataset_PitOrlManh/zipped\%20images/%s --no-check-certificate" % B_zip)
 
 tempA=os.path.join(datafolder,"tempA")
 if not os.path.exists(tempA):
@@ -31,8 +31,8 @@ tempB=os.path.join(datafolder,"tempB")
 if not os.path.exists(tempB):
     os.makedirs(tempB)
 if not skipunzip:
-    os.system("unzip 01_images.zip -d %s" % tempA)
-    os.system("unzip part1.zip -d %s" % tempB)
+    os.system("unzip %s -d %s" % (A_zip,tempA))
+    os.system("unzip %s -d %s" % (B_zip,tempB))
 if mode=="UGATIT":
     trainA=os.path.join(datafolder,"trainA")
     trainB=os.path.join(datafolder,"trainB")
