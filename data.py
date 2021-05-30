@@ -90,6 +90,8 @@ for image in images:
         im_crop = im.crop((5,150,width-5,height-20))
         im_crop=im_crop.resize((320,256))
         im_crop.save(os.path.join(tempB,image))
+    else:
+        os.system("rm -f %s" % os.path.join(tempB,image))
 
 
 
